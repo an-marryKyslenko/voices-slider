@@ -1,0 +1,16 @@
+.slider {
+  width: 100%;
+  overflow: hidden;
+}
+
+.slider-track {
+  transition: transform .3s;
+  display: flex;
+}
+
+.card {
+  box-sizing: border-box;
+  flex: 0 0 33.33%;
+  padding: 1rem;
+}
+/*# sourceMappingURL=agency-amazon-task.1b44cdfa.css.map */
