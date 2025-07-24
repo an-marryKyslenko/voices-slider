@@ -130,7 +130,7 @@
 
   // Only insert newRequire.load when it is actually used.
   // The code in this file is linted against ES5, so dynamic import is not allowed.
-  // INSERT_LOAD_HERE
+  function $parcel$resolve(url) {  url = importMap[url] || url;  return import.meta.resolve(distDir + url);}newRequire.resolve = $parcel$resolve;
 
   Object.defineProperty(newRequire, 'root', {
     get: function () {
@@ -667,18 +667,230 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 }
 
 },{}],"3Aj1C":[function(require,module,exports,__globalThis) {
-const track = document.querySelector('.slider-track');
+var _data = require("./data");
+var _pagination = require("./pagination");
+'use strict';
+const brackets = new URL(require("c2331f262ae81f0")).href;
+let visibleCards = 1;
+let slideWidth = 380;
+const sliderGap = 15;
 let currentIndex = 0;
-const cardsPerView = 3;
-const cardCount = track.children.length;
-function slideNext() {
-    currentIndex += cardsPerView;
-    if (currentIndex >= cardCount / 2) currentIndex = 0;
-    const offset = currentIndex * (100 / cardsPerView);
-    track.style.transform = `translateX(-${offset}%)`;
+let paginationIndex = 0;
+const track = document.getElementById("sliderTrack");
+const sliderContainer = document.getElementById("sliderContainer");
+const fullData = [
+    ...(0, _data.data),
+    ...(0, _data.data)
+];
+function createCard({ text, logo, avatar, author, position }) {
+    const card = document.createElement("div");
+    card.classList.add("card");
+    card.innerHTML = `
+		<div class="card__logo">
+			<img src="${logo}" alt="Company Logo" />
+		</div>
+		<p class="card__text">${text}</p>
+		<img class="card__decorate" src="${brackets}"/>
+		<div class="card__footer">
+			<img class="card__avatar" src="${avatar}" alt="${author}" />
+			<div class="card__author">
+				<strong class="card__anthor-name">${author}</strong><br />
+				<span>${position}</span>
+			</div>
+		</div>
+	`;
+    return card;
 }
-setInterval(slideNext, 3000);
+function renderCards() {
+    fullData.forEach((item)=>{
+        const card = createCard(item);
+        track.appendChild(card);
+    });
+}
+let prevVisibleCards = visibleCards;
+function calculateVisibleCards() {
+    const containerWidth = sliderContainer.offsetWidth;
+    const minCardWidth = 320;
+    const maxCardWidth = 380;
+    let possibleCards = Math.floor(containerWidth / (minCardWidth + sliderGap));
+    if (possibleCards < 1) possibleCards = 1;
+    if (possibleCards > 3) possibleCards = 3;
+    if (possibleCards === prevVisibleCards) return false;
+    let availableSpace = containerWidth - (possibleCards - 1) * sliderGap;
+    slideWidth = Math.min(maxCardWidth, Math.floor(availableSpace / possibleCards));
+    sliderContainer.classList.remove(`slider__slides-${prevVisibleCards}`);
+    sliderContainer.classList.add(`slider__slides-${possibleCards}`);
+    visibleCards = possibleCards;
+    return true;
+}
+function updateTrackWidth() {
+    const trackWidth = visibleCards > 1 ? slideWidth * visibleCards + sliderGap * (visibleCards - 1) : slideWidth;
+    track.style.width = `${trackWidth}px`;
+    // Проставляємо width карткам
+    const cards = track.querySelectorAll(".card");
+    cards.forEach((card)=>{
+        card.style.width = `${slideWidth}px`;
+    });
+}
+function updateSlider() {
+    const offset = (slideWidth + sliderGap) * currentIndex;
+    track.style.transform = `translateX(-${offset}px)`;
+    (0, _pagination.updatePagination)(visibleCards, paginationIndex);
+}
+function resetSlider() {
+    calculateVisibleCards();
+    updateTrackWidth();
+    updateSlider();
+}
+document.querySelector("#next").addEventListener("click", ()=>{
+    currentIndex++;
+    paginationIndex++;
+    if (paginationIndex > fullData.length - 1) paginationIndex = 0;
+    if (currentIndex > (0, _data.data).length - 1) {
+        currentIndex = 0;
+        track.style.transition = "none";
+        updateSlider();
+        setTimeout(()=>{
+            track.style.transition = "transform 0.4s ease";
+            currentIndex++;
+            // paginationIndex++;
+            updateSlider();
+        }, 20);
+    } else updateSlider();
+});
+document.querySelector("#prev").addEventListener("click", ()=>{
+    currentIndex--;
+    paginationIndex--;
+    if (paginationIndex < 0) paginationIndex = fullData.length - 1;
+    if (currentIndex < 0) {
+        currentIndex = (0, _data.data).length - 1;
+        track.style.transition = "none";
+        updateSlider();
+        setTimeout(()=>{
+            track.style.transition = "transform 0.4s ease";
+            currentIndex--;
+            // paginationIndex--;
+            updateSlider();
+        }, 20);
+    } else updateSlider();
+});
+// Initial
+renderCards();
+resetSlider();
+// On resize
+let resizeTimeout;
+window.addEventListener("resize", ()=>{
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(()=>{
+        if (calculateVisibleCards()) resetSlider();
+    }, 200);
+});
 
-},{}]},["huHYX","3Aj1C"], "3Aj1C", "parcelRequire2c7b", {})
+},{"./data":"3BILG","./pagination":"2tjKu","c2331f262ae81f0":"3kwxY"}],"3BILG":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "data", ()=>data);
+const logo1 = new URL(require("ac475e0752dc1c22")).href;
+const logo2 = new URL(require("9f0607cd106dc42c")).href;
+const logo3 = new URL(require("d6882c087f03882e")).href;
+const avatar2 = new URL(require("63c85082755cd0be")).href;
+const avatar1 = new URL(require("775c1f4eebf4f4d9")).href;
+const avatar3 = new URL(require("a691244703a0abbc")).href;
+const data = [
+    {
+        text: "Sales Fortuna made managing sales easier and helped us focus on customers. Its tools have been crucial for our growth and client satisfaction.",
+        id: 1,
+        logo: logo1,
+        avatar: avatar1,
+        author: 'Ethan Morgan',
+        position: 'Founder and CEO, Serene Living Products'
+    },
+    {
+        text: "Sales Fortuna has made sales so much easier for us. It saves time, simplifies the whole process, and helps us land more deals without extra hassle.",
+        id: 2,
+        logo: logo2,
+        avatar: avatar2,
+        author: 'Olivia Hayes',
+        position: 'Owner, Starlight Creations'
+    },
+    {
+        text: "Sales Fortuna has simplified our lead generation, helping us attract qualified prospects effortlessly and drive consistent growth.",
+        id: 3,
+        logo: logo3,
+        avatar: avatar3,
+        author: 'Alexander Reed',
+        position: 'Co-Founder, Opulent Living Group'
+    }
+];
 
-//# sourceMappingURL=agency-amazon-task.4841ef46.js.map
+},{"ac475e0752dc1c22":"fnqZH","9f0607cd106dc42c":"cf8hw","d6882c087f03882e":"18Mok","63c85082755cd0be":"ajvnl","775c1f4eebf4f4d9":"lnz9T","a691244703a0abbc":"9t9ca","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"fnqZH":[function(require,module,exports,__globalThis) {
+module.exports = module.bundle.resolve("company-1.5cded593.jpg") + "?" + Date.now();
+
+},{}],"cf8hw":[function(require,module,exports,__globalThis) {
+module.exports = module.bundle.resolve("company-2.1fe76649.jpg") + "?" + Date.now();
+
+},{}],"18Mok":[function(require,module,exports,__globalThis) {
+module.exports = module.bundle.resolve("company-3.a301d5c1.jpg") + "?" + Date.now();
+
+},{}],"ajvnl":[function(require,module,exports,__globalThis) {
+module.exports = module.bundle.resolve("avatar-2.fcd2b7d7.jpg") + "?" + Date.now();
+
+},{}],"lnz9T":[function(require,module,exports,__globalThis) {
+module.exports = module.bundle.resolve("avatar-1.fa2ccdb2.jpg") + "?" + Date.now();
+
+},{}],"9t9ca":[function(require,module,exports,__globalThis) {
+module.exports = module.bundle.resolve("avatar-3.521b28fd.jpg") + "?" + Date.now();
+
+},{}],"jnFvT":[function(require,module,exports,__globalThis) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, '__esModule', {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === 'default' || key === '__esModule' || Object.prototype.hasOwnProperty.call(dest, key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
+
+},{}],"2tjKu":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "updatePagination", ()=>updatePagination);
+const paginationDots = document.querySelectorAll('.pagination__dot');
+function updatePagination(visibleCards, paginationIndex) {
+    if (visibleCards !== 3) {
+        paginationDots.forEach((dot)=>dot.style.display = 'none');
+        return;
+    }
+    paginationDots.forEach((dot)=>dot.style.display = 'inline-block');
+    const pageIndex = Math.floor(paginationIndex / 3) % 2;
+    console.log(pageIndex, paginationIndex);
+    paginationDots.forEach((dot)=>dot.classList.remove('pagination__dot-active'));
+    paginationDots[pageIndex].classList.add('pagination__dot-active');
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"3kwxY":[function(require,module,exports,__globalThis) {
+module.exports = module.bundle.resolve("\u201C.a00c3d8a.svg") + "?" + Date.now();
+
+},{}]},["huHYX","3Aj1C"], "3Aj1C", "parcelRequire2c7b", {}, "./", "/")
+
+//# sourceMappingURL=voices-slider.4841ef46.js.map

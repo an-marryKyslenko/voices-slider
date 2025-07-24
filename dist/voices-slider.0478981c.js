@@ -1,0 +1,15 @@
+let e;const t=new URL(import.meta.resolve("gyp6N")).href,a=new URL(import.meta.resolve("aC8wy")).href,o=new URL(import.meta.resolve("gTkNi")).href,s=new URL(import.meta.resolve("g2wPK")).href,r=new URL(import.meta.resolve("7aGyj")).href,n=[{text:"Sales Fortuna made managing sales easier and helped us focus on customers. Its tools have been crucial for our growth and client satisfaction.",id:1,logo:t,avatar:r,author:"Ethan Morgan",position:"Founder and CEO, Serene Living Products"},{text:"Sales Fortuna has made sales so much easier for us. It saves time, simplifies the whole process, and helps us land more deals without extra hassle.",id:2,logo:a,avatar:s,author:"Olivia Hayes",position:"Owner, Starlight Creations"},{text:"Sales Fortuna has simplified our lead generation, helping us attract qualified prospects effortlessly and drive consistent growth.",id:3,logo:o,avatar:new URL(import.meta.resolve("5yvWg")).href,author:"Alexander Reed",position:"Co-Founder, Opulent Living Group"}],i=document.querySelectorAll(".pagination__dot"),l=new URL(import.meta.resolve("8AyzW")).href;let d=1,c=380,m=0,u=0;const h=document.getElementById("sliderTrack"),p=document.getElementById("sliderContainer"),f=[...n,...n];let g=d;function v(){let e=p.offsetWidth,t=Math.floor(e/335);return t<1&&(t=1),t>3&&(t=3),t!==g&&(c=Math.min(380,Math.floor((e-(t-1)*15)/t)),p.classList.remove(`slider__slides-${g}`),p.classList.add(`slider__slides-${t}`),d=t,!0)}function y(){let e=(c+15)*m;h.style.transform=`translateX(-${e}px)`,function(e,t){if(3!==e)return i.forEach(e=>e.style.display="none");i.forEach(e=>e.style.display="inline-block");let a=Math.floor(t/3)%2;console.log(a,t),i.forEach(e=>e.classList.remove("pagination__dot-active")),i[a].classList.add("pagination__dot-active")}(d,u)}function _(){v();let e=d>1?c*d+15*(d-1):c;h.style.width=`${e}px`,h.querySelectorAll(".card").forEach(e=>{e.style.width=`${c}px`}),y()}document.querySelector("#next").addEventListener("click",()=>{m++,++u>f.length-1&&(u=0),m>n.length-1?(m=0,h.style.transition="none",y(),setTimeout(()=>{h.style.transition="transform 0.4s ease",m++,y()},20)):y()}),document.querySelector("#prev").addEventListener("click",()=>{m--,--u<0&&(u=f.length-1),m<0?(m=n.length-1,h.style.transition="none",y(),setTimeout(()=>{h.style.transition="transform 0.4s ease",m--,y()},20)):y()}),f.forEach(e=>{let t=function({text:e,logo:t,avatar:a,author:o,position:s}){let r=document.createElement("div");return r.classList.add("card"),r.innerHTML=`
+		<div class="card__logo">
+			<img src="${t}" alt="Company Logo" />
+		</div>
+		<p class="card__text">${e}</p>
+		<img class="card__decorate" src="${l}"/>
+		<div class="card__footer">
+			<img class="card__avatar" src="${a}" alt="${o}" />
+			<div class="card__author">
+				<strong class="card__anthor-name">${o}</strong><br />
+				<span>${s}</span>
+			</div>
+		</div>
+	`,r}(e);h.appendChild(t)}),_(),window.addEventListener("resize",()=>{clearTimeout(e),e=setTimeout(()=>{v()&&_()},200)});
+//# sourceMappingURL=voices-slider.0478981c.js.map

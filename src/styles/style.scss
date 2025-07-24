@@ -1,3 +1,16 @@
 @import 'utils/variables';
 @import 'utils/mixin';
+@import 'blocks/slider';
 @import 'blocks/card';
+@import 'blocks/pagination';
+@import 'blocks/page';
+
+body {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	margin: 0;
+	font-family: "Space Grotesk",  sans-serif;
+}
+
+

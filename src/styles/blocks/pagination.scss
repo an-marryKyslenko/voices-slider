@@ -1,0 +1,18 @@
+.pagination{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 11px;
+	
+	&__dot{
+		width: 11px;
+		height: 11px;
+		background-color: #D9D9D9;
+		border-radius: 50%;
+		transition: background-color 0.3s ease 0s;
+
+		&-active{
+			background-color: #4B4B4B;
+		}
+	}
+}

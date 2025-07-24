@@ -1,5 +1,10 @@
-$accent-color: #d12d35;
 $tablet-min-width: 744px;
 $decstop-min-width: 1024px;
 $tablet-width: 920px;
-$desktop-width: 1200px;
+$desktop-width: 1400px;
+
+$min-card-width: 320px;
+$max-card-width: 380px;
+$card-width: clamp($min-card-width, 30vw, $max-card-width);
+$gap: 15px;
+$arrowSize: 68px;

@@ -3,12 +3,38 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="styles/style.scss">
+	<link href="https://fonts.googleapis.com/css?family=Space+Grotesk:regular,500,600,700" rel="stylesheet" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-	<link rel="stylesheet" href="./styles/style.scss">
+	
 	<script defer type="module" src="./scripts/main.js"></script>
 	<title>Document</title>
 </head>
 <body>
-	Hello word
+	<div class="page">
+		<div class="page__container">
+			<h1 class="page__title">Voices of Success with Sales Fortuna</h1>
+			<div id="slider" class="page__slider slider">
+				<div id="sliderContainer" class="slider__slides">
+					<div class="slider__track" id="sliderTrack">
+						<!-- Card items will be injected by JS -->
+					</div>
+				</div>
+				<div class="slider__buttons">
+					<button id="prev" class="slider__btn slider__btn-prev">
+						<img src="./assets/^.svg" alt="button to previos image">
+					</button>
+					<button id="next" class="slider__btn slider__btn-next">
+						<img src="./assets/^.svg" alt="button to next image">
+					</button>
+				</div>
+				<div class="slider__pagination pagination">
+					<span class="pagination__dot pagination__dot-active"></span>
+					<span class="pagination__dot"></span>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 </body>
 </html>
