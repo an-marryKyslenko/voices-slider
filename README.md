@@ -1,4 +1,4 @@
-# Template - Parcel
+# VOICES SLIDER FROM 
 
 ##  Stack
 - HTML/CSS/SCSS
@@ -11,3 +11,7 @@
 npm install
 npm run start
 ```
+
+## Demo link
+
+[LINK](https://an-marrykyslenko.github.io/voices-slider/)
