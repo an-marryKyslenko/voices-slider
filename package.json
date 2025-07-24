@@ -8,7 +8,7 @@
     "stylelint": "stylelint \"src/**/*.{scss,css}\"",
     "prepare": "husky install",
     "start": "parcel src/index.html",
-    "build": "parcel build src/index.html",
+    "build": "parcel build src/index.html --public-url ./",
     "deploy": "gh-pages -d dist"
   },
   "lint-staged": {
